@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">aqi</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="few_sec">Few seconds ago</string>
+    <string name="toast_message">Chart refreshed!!</string>
+    <string name="toast_message2">Page refreshed!!</string>
+</resources>
