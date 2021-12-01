@@ -14,6 +14,6 @@ object Constants {
     const val TEXT_FEW_MIN = " minutes ago"
     const val CITY = "city"
 
-    const val REFRESH_CITIES :Long  = 10
-    const val REFRESH_CITY :Long= 30
+    const val REFRESH_CITIES :Long  = 5
+    const val REFRESH_CITY :Long= 20
 }
