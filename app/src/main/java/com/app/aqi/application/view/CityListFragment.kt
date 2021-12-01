@@ -32,20 +32,28 @@ class CityListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_city_list, container, false)
-        return binding.root
-    }
-
-    override fun onStart() {
-        super.onStart()
 
         setUpUI()
 
         setupObservers()
 
         setupListeners()
+
+        return binding.root
+    }
+
+    private fun setupObservers() {
+        viewModel.cityList.observe(viewLifecycleOwner, Observer {
+            adapter?.setCities(it)
+            Toast.makeText(context, R.string.toast_message2, Toast.LENGTH_LONG).show()
+        })
+    }
+
+    private fun setUpUI() {
+        binding?.rvCityList.layoutManager = LinearLayoutManager(context)
+        binding?.rvCityList.adapter = adapter
     }
 
     override fun onResume() {
@@ -66,18 +74,6 @@ class CityListFragment : Fragment() {
         viewModel.startFetch()
     }
 
-    private fun setupObservers() {
-        viewModel.cityList.observe(this, Observer {
-            adapter?.setCities(it)
-            Toast.makeText(context, R.string.toast_message2, Toast.LENGTH_LONG).show()
-
-        })
-    }
-
-    private fun setUpUI() {
-        binding?.rvCityList.layoutManager = LinearLayoutManager(context)
-        binding?.rvCityList.adapter = adapter
-    }
 
     override fun onPause() {
         super.onPause()

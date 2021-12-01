@@ -36,7 +36,17 @@ class CityGraphFragment : Fragment() {
         // Inflate the layout for this fragment
         binding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_city_graph, container, false)
+
+        setObserver()
+
         return binding.root
+    }
+
+    private fun setObserver() {
+        viewModel.city.observe(viewLifecycleOwner, Observer {
+            binding.chart.updateView(it)
+            Toast.makeText(context, R.string.toast_message, Toast.LENGTH_LONG).show()
+        })
     }
 
     override fun onResume() {
@@ -46,14 +56,6 @@ class CityGraphFragment : Fragment() {
 
     private fun updateUI() {
         viewModel.getCity(city)
-        setObserver()
-    }
-
-    private fun setObserver() {
-        viewModel.city.observe(this, Observer {
-            binding.chart.updateView(it)
-            Toast.makeText(context, R.string.toast_message, Toast.LENGTH_LONG).show()
-        })
     }
 
     override fun onPause() {
